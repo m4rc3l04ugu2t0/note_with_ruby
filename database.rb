@@ -1,17 +1,20 @@
-require "pstore"
+# frozen_string_literal: true
 
+require 'pstore'
+
+# save nostes in database
 class Database
   def initialize
-    @store = PStore.new "notes.store"
+    @store = PStore.new 'notes.store'
   end
 
-  def store note
+  def store(note)
     @store.transaction do
       @store[note.id.to_sym] = note
     end
   end
 
-  def get_all
+  def all_notes
     notes = []
     @store.transaction do
       @store.roots.each do |id|
@@ -21,7 +24,7 @@ class Database
     notes
   end
 
-  def delete note
+  def delete(note)
     @store.transaction do
       @store.delete note.id.to_sym
     end

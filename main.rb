@@ -1,3 +1,6 @@
-require "./app"
+# frozen_string_literal: true
 
-App.run
+require_relative './app'
+
+app = App.new
+app.app_run
